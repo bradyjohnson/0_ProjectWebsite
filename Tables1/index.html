@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+  <head>
+  <!-- bootstrap stylesheet --><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- bootstrap widget theme --><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!-- ngGrid --><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.css">
+  <!-- Material Design - Style --><link rel="stylesheet" href="http://fezvrasta.github.io/bootstrap-material-design/dist/css/material-wfont.min.css">
+  <!-- Material Design - Ripples --><link rel="stylesheet" href="http://fezvrasta.github.io/bootstrap-material-design/dist/css/ripples.min.css">
+  <!-- app specific stylesheet --><link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- grid style --><link rel="stylesheet" type="text/css" href="css/ng-grid.css">
+  <!-- ui grid stuff --><link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+  <!-- ui grid stuff --><link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+
+
+  <body>
+  <div class="container">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-click="isExpanded = !isExpanded">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+
+          <a  href="http://ui-grid.info"  class="navbar-brand">UI Grid</a>
+
+        </div>
+
+        <div class="for-lg-view-hide">
+
+
+    <div ng-controller="controller">
+      <div ng-grid="gridOptions"></div>
+      <h4 class="feature-heading">Complex Example</h4>
+      <div class="grid" ui-grid="gridOptionsComplex" ui-grid-edit ui-grid-resize-columns></div>
+    </div>
+
+
+</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Angular --><script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <!-- jQuery --><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- ngGrid --><script src="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.js"></script>
+    <!-- Material Design - Ripples --><script src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <!-- Material Design - Style --><script src="http://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+
+    <!-- app specific content -->
+    <script src="js/app.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/customizer.js"></script>
+
+  </body>
+</html>
