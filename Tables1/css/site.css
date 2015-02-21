@@ -113,7 +113,8 @@ body {
 }
 
 .grid {
-  height: 250px;
+  height: 500px; !important;
+  color: red;
 }
 .pink {
   color: pink;  

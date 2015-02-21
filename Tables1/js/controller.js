@@ -1,6 +1,6 @@
 var app = angular.module('myApp');
 
-app.controller('controller', function($scope, FirebaseService){
+app.controller('controller', function($scope, FirebaseService, uiGridConstants){
 
   var getIntern = function() {
     FirebaseService.getIntern().then(function (data) {
@@ -10,28 +10,18 @@ app.controller('controller', function($scope, FirebaseService){
 
   }
 
-  $scope.myData = [
-    {candidate: "Tiancum"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-    {candidate: "test"},
-  ]
-
   getIntern();
 
-  $scope.gridOptions = {
+  $scope.gridOptionsComplex = {
+    enableFiltering: true,
+    showGridFooter: true,
+    showColumnFooter: true,
     data: 'data',
-    //enablePinning: true,
-    //sortInfo: {fields: ['candidate', 'overall_score', 'school', 'position'], directions: ['asc']},
+    enablePinning: true,
+    sortInfo: {fields: ['candidate', 'overall_score', 'school', 'position'], directions: ['asc']},
     columnDefs: [
-      {field: 'candidate', displayName: 'Candidate', width: '200px'},
-      {field: 'overall_score', displayName: 'Overall Score', width: '120px'},
+      {field: 'candidate', displayName: 'Candidate', aggregationType: uiGridConstants.aggregationTypes.count},
+      {field: 'overall_score', displayName: 'Overall Score', aggregationType: uiGridConstants.aggregationTypes.avg},
       {field: 'school', displayName: 'School'},
       {field: 'position', displayName: 'Position'},
       {field: 'available_year', displayName: 'Year'},

@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['ngGrid'])
+var app = angular.module('myApp', ['ui.grid', 'ngMaterial'])
