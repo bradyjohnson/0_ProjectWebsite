@@ -1,0 +1,91 @@
+<md-dialog>
+<div ng-app="myApp" ng-controller="addController" layout="column">
+
+  <md-content md-theme="dark" style="color: #FFFFFF;"><h3>Candidate Interview Form</h3></md-content>
+
+  <md-content md-theme="default" class="md-padding">
+    <form name="userForm">
+
+      <div layout layout-sm="column">
+
+        <md-input-container flex>
+          <label>Candidate</label>
+          <input ng-model="user.title">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Email</label>
+          <input ng-model="user.email" type="email">
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Available Date</label>
+          <input type="date" ng-model="date">
+        </md-input-container>
+
+      </div>
+
+      <div layout layout-sm="column">
+        <md-input-container flex>
+          <label>Major</label>
+          <input ng-model="user.firstName" placeholder="Placeholder text">
+        </md-input-container>
+        <md-input-container flex>
+          <label>Last Name</label>
+          <input ng-model="theMax">
+        </md-input-container>
+      </div>
+
+      <div layout layout-sm="column">
+        <md-input-container flex>
+          <label>School</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in school"></select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>GPA</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in gpa"></select>
+        </md-input-container>
+      </div>
+
+      <div layout layout-sm="column">
+        <md-input-container flex>
+          <label>Internship</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in internship"></select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Location</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in location"></select>
+        </md-input-container>
+      </div>
+
+      <div layout layout-sm="column">
+        <md-input-container flex>
+          <label>Overall Score</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in overallScore"></select>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>test</label>
+          <select class="md-input" ng-model="select" ng-options="value for value in test"></select>
+        </md-input-container>
+      </div>
+
+      <md-input-container flex>
+        <label>Address</label>
+        <input ng-model="user.address">
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>Manager Notes</label>
+        <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+      </md-input-container>
+
+
+
+    </form>
+  </md-content>
+</div>
+</md-dialog>
+

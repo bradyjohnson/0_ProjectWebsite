@@ -6,18 +6,18 @@ var app = angular.module('myApp');
 app.directive('mdTable', function () {
   return {
     restrict: 'E',
-    scope: { headers: '=', data: '=', sortable: '=', filters: '=',customClass: '=customClass',thumbs:'=', count: '=' },
+    scope: { headers: '=', content: '=', sortable: '=', filters: '=',customClass: '=customClass',thumbs:'=', count: '=' },
     controller: function ($scope,$filter,$window) {
       var orderBy = $filter('orderBy');
       $scope.currentPage = 0;
       $scope.nbOfPages = function () {
-        return Math.ceil($scope.data.length / $scope.count);
+        return Math.ceil($scope.content.length / $scope.count);
       },
         $scope.handleSort = function (field) {
           if ($scope.sortable.indexOf(field) > -1) { return true; } else { return false; }
         };
       $scope.order = function(predicate, reverse) {
-        $scope.data = orderBy($scope.data, predicate, reverse);
+        $scope.content = orderBy($scope.content, predicate, reverse);
         $scope.predicate = predicate;
       };
       $scope.order($scope.sortable[0],false);
@@ -28,11 +28,10 @@ app.directive('mdTable', function () {
         $scope.currentPage = page;
       };
     },
-
-
-
     template:
-    '<table class="md-table">'+
+
+    // table-header //
+    '<table class="container">'+
     '<thead>'+
     '<tr class="md-table-headers-row">'+
     '<th class="md-table-header" ng-repeat="h in headers">'+
@@ -41,7 +40,9 @@ app.directive('mdTable', function () {
     '</th><th class="md-table-header"></th>'+
     '</tr>'+
     '</thead><tbody>'+
-    '<tr class="md-table-data-row" ng-repeat="c in content | filter:filters | startFrom:currentPage*count | limitTo: count">'+
+
+    // table-body //
+    '<tr class="md-table-content-row" ng-repeat="c in content | filter:filters | startFrom:currentPage*count | limitTo: count">'+
     '<td ng-repeat="h in headers" ng-if="h.field == thumbs" class="md-table-thumbs">'+
     '<div ng-if="h.field == thumbs" style="background-image:url({{c.thumb}})"></div>'+
     '</td>'+
@@ -51,8 +52,10 @@ app.directive('mdTable', function () {
     '</tr>'+
     '</tbody>'+
     '</table>'+
-    '<div class="md-table-footer" layout="row">'+
-    '<span class="md-table-count-info">Rows count per page : <a href ng-click="goToPage(0); count=1">1</a>, <a href ng-click="goToPage(0); count=10">10</a>, <a href ng-click="goToPage(0); count=25">25</a>, <a href ng-click="goToPage(0); count=50">50</a>, <a href ng-click="goToPage(0); count=100">100</a> (current is <strong>{{count}}</strong>)</span>'+
+
+    // Below is directive for table-footer-navigation //
+    '<div class="container" layout="row">'+
+    '<span class="md-table-count-info">Rows count per page : <a href ng-click="goToPage(0); count=5">5</a>, <a href ng-click="goToPage(0); count=10">10</a>, <a href ng-click="goToPage(0); count=25">25</a>, <a href ng-click="goToPage(0); count=50">50</a> (current is <strong>{{count}}</strong>)</span>'+
     '<span flex></span>'+
     '<span ng-show="nbOfPages() > 1">'+
     '<md-button class="md-table-footer-item" ng-disabled="currentPage==0" ng-click="currentPage=currentPage-1">'+
@@ -67,10 +70,3 @@ app.directive('mdTable', function () {
     '</md-button></span></div>'
   }
 });
-
-  app.filter('startFrom',function (){
-    return function (input,start) {
-      start = +start;
-      return input.slice(start);
-    }
-  });

@@ -1,23 +1,20 @@
+/**
+ * Created by williambjohnson on 2/21/15.
+ */
 var app = angular.module('myApp');
 
-app.controller('controller', function($scope, firebase){
+app.controller('controller', function ($scope, firebase){
   $scope.toggleSearch = false;
 
   var getContent = function() {
     firebase.getContent().then(function (data) {
-      $scope.data = data;
-      console.log($scope.data);
+      $scope.content = data;
+      console.log($scope.content);
     })
 
   };
 
   getContent();
-
-  $scope.data = 'data';
-  $scope.custom = {candidate: 'bold', overall_score:'bold',school: 'grey'};
-  $scope.sortable = ['candidate', 'overall_score', 'school', 'position', 'available_year', 'available_month'];
-  $scope.thumbs = 'thumb';
-  $scope.count = 5;
 
   $scope.headers = [
     {field: 'candidate', name: 'Candidate'},
@@ -41,13 +38,10 @@ app.controller('controller', function($scope, firebase){
     //{field: 'date', name: 'Date Interviewed'}
   ];
 
+  $scope.custom = {candidate: 'bold', overall_score:'bold',school: 'grey'};
+  $scope.sortable = ['candidate', 'overall_score', 'school', 'position', 'available_year', 'available_month'];
+  $scope.thumbs = 'thumb';
+  $scope.count = 5;
 
-  $scope.addContent = function(){
-    FirebaseService.addContent($scope.newContent).then(function(){
-      delete $scope.newContent;
-      getContent();
-    });
-
-  };
 
 });
