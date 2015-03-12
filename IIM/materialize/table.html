@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="description" content="Materialize is a modern responsive CSS framework based on Material Design by Google. ">
+  <title>Table - Materialize</title>
+  <!-- Favicons-->
+  <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <!--  Android 5 Chrome Color-->
+  <meta name="theme-color" content="#EE6E73">
+  <!-- CSS-->
+  <link href="css/prism.css" rel="stylesheet">
+  <link href="css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="../js/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="../js/jquery.tablesorter.js"></script>
+
+</head>
+
+
+<body>
+<header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper"><a class="page-title">Table</a></div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full"><i class="mdi-navigation-menu"></i></a></div>
+  <ul id="nav-mobile" class="side-nav fixed">
+    <li class="logo"><a id="logo-container" href="http://materializecss.com/" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml" data="res/materialize.svg">Your browser does not support SVG</object>
+    </a></li>
+    <li class="bold"><a href="about.html" class="waves-effect waves-teal">About</a></li>
+    <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Getting Started</a></li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li class="bold"><a class="collapsible-header active waves-effect waves-teal">CSS</a>
+
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="color.html">Color</a></li>
+              <li><a href="grid.html">Grid</a></li>
+              <li><a href="helpers.html">Helpers</a></li>
+              <li><a href="media-css.html">Media</a></li>
+              <li><a href="sass.html">Sass</a></li>
+              <li><a href="shadow.html">Shadow</a></li>
+              <li class="active"><a href="table.html">Table</a></li>
+              <li><a href="typography.html">Typography</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Components</a>
+
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="badges.html">Badges</a></li>
+              <li><a href="buttons.html">Buttons</a></li>
+              <li><a href="cards.html">Cards</a></li>
+              <li><a href="collections.html">Collections</a></li>
+              <li><a href="footer.html">Footer</a></li>
+              <li><a href="forms.html">Forms</a></li>
+              <li><a href="icons.html">Icons</a></li>
+              <li><a href="navbar.html">Navbar</a></li>
+              <li><a href="pagination.html">Pagination</a></li>
+              <li><a href="preloader.html">Preloader</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="bold"><a class="collapsible-header  waves-effect waves-teal">JavaScript</a>
+
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="collapsible.html">Collapsible</a></li>
+              <li><a href="dialogs.html">Dialogs</a></li>
+              <li><a href="dropdown.html">Dropdown</a></li>
+              <li><a href="media.html">Media</a></li>
+              <li><a href="modals.html">Modals</a></li>
+              <li><a href="parallax.html">Parallax</a></li>
+              <li><a href="pushpin.html">Pushpin</a></li>
+              <li><a href="scrollfire.html">ScrollFire</a></li>
+              <li><a href="scrollspy.html">Scrollspy</a></li>
+              <li><a href="side-nav.html">SideNav</a></li>
+              <li><a href="tabs.html">Tabs</a></li>
+              <li><a href="transitions.html">Transitions</a></li>
+              <li><a href="waves.html">Waves</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">Mobile</a></li>
+    <li class="bold"><a href="showcase.html" class="waves-effect waves-teal">Showcase</a></li>
+  </ul>
+</header>
+
+
+<main>
+  <div class="container">
+    <div class="row">
+	    <div class="col s12 m3 l4">
+        <input class="search selectable" type="search" placeholder="Search" data-column="all">
+        <!-- select to change data-column attribute of the above input -->
+        <select class="change-input">
+          <option value="all">all</option>
+          <option value="0,3">Columns 0,3</option>
+          <option value="1-2">Columns 1-2</option>
+          <option value="0">Rank</option>
+          <option value="1">First Name</option>
+          <option value="2">Last Name</option>
+        </select>
+        <br>
+        <input class="search" type="search" placeholder="First Name" data-column="1"><br>
+        <input class="search" type="search" placeholder="Last Name" data-column="2"><br>
+        <!-- targeted by the "filter_reset" option -->
+        <button type="button" class="reset">Reset Search</button>
+	    </div>
+      <div class="col s12 m9 l10">
+        <!--  Tables Section-->
+        <div id="hoverable" class="section scrollspy">
+          <h2 class="header">Hoverable Table</h2>
+
+          <div class="row">
+            <div class="col s12">
+              <p>Add <code class="language-markup">class="hoverable"</code> to the table tag for a hoverable table</p>
+              <table class="hoverable">
+                <thead>
+                <tr>
+                  <th data-field="id">Name</th>
+                  <th data-field="name">Item Name</th>
+                  <th data-field="price">Item Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Alvin</td>
+                  <td>Eclair</td>
+                  <td>$0.87</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <input class="search selectable" type="search" placeholder="Search" data-column="all">
+      <!-- select to change data-column attribute of the above input -->
+      <select class="change-input">
+        <option value="all">all</option>
+        <option value="0,3">Columns 0,3</option>
+        <option value="1-2">Columns 1-2</option>
+        <option value="0">Rank</option>
+        <option value="1">First Name</option>
+        <option value="2">Last Name</option>
+      </select>
+      <br>
+      <input class="search" type="search" placeholder="First Name" data-column="1"><br>
+      <input class="search" type="search" placeholder="Last Name" data-column="2"><br>
+      <!-- targeted by the "filter_reset" option -->
+      <button type="button" class="reset">Reset Search</button>
+
+      <table class="tablesorter">
+        <thead>
+        <tr>
+          <th>Rank</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Total</th>
+          <th>Discount</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Philip Aaron</td>
+          <td>Johnson Sr Esq</td>
+          <td>25</td>
+          <td>$5.95</td>
+          <td>22%</td>
+          <td>Jun 26, 2004 7:22 AM</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Aaron</td>
+          <td>Hibert</td>
+          <td>12</td>
+          <td>$2.99</td>
+          <td>5%</td>
+          <td>Aug 21, 2009 12:21 PM</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Brandon Clark</td>
+          <td>Henry Jr</td>
+          <td>51</td>
+          <td>$42.29</td>
+          <td>18%</td>
+          <td>Oct 13, 2000 1:15 PM</td>
+        </tr>
+        <tr>
+          <td>111</td>
+          <td>Peter</td>
+          <td>Parker</td>
+          <td>28</td>
+          <td>$9.99</td>
+          <td>20%</td>
+          <td>Jul 6, 2006 8:14 AM</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>John</td>
+          <td>Hood</td>
+          <td>33</td>
+          <td>$19.99</td>
+          <td>25%</td>
+          <td>Dec 10, 2002 5:14 AM</td>
+        </tr>
+        <tr>
+          <td>013</td>
+          <td>Clark</td>
+          <td>Kent Sr.</td>
+          <td>18</td>
+          <td>$15.89</td>
+          <td>44%</td>
+          <td>Jan 12, 2003 11:14 AM</td>
+        </tr>
+        <tr>
+          <td>005</td>
+          <td>Bruce</td>
+          <td>Almighty Esq</td>
+          <td>45</td>
+          <td>$153.19</td>
+          <td>44%</td>
+          <td>Jan 18, 2021 9:12 AM</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Alex</td>
+          <td>Dumass</td>
+          <td>13</td>
+          <td>$5.29</td>
+          <td>4%</td>
+          <td>Jan 8, 2012 5:11 PM</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Jim</td>
+          <td>Franco</td>
+          <td>24</td>
+          <td>$14.19</td>
+          <td>14%</td>
+          <td>Jan 14, 2004 11:23 AM</td>
+        </tr>
+        <tr>
+          <td>166</td>
+          <td>Bruce Lee</td>
+          <td>Evans</td>
+          <td>22</td>
+          <td>$13.19</td>
+          <td>11%</td>
+          <td>Jan 18, 2007 9:12 AM</td>
+        </tr>
+        <tr>
+          <td>100</td>
+          <td>Brenda Lee</td>
+          <td>McMasters</td>
+          <td>18</td>
+          <td>$55.20</td>
+          <td>15%</td>
+          <td>Feb 12, 2010 7:23 PM</td>
+        </tr>
+        <tr>
+          <td>55</td>
+          <td>Dennis</td>
+          <td>Bronson</td>
+          <td>65</td>
+          <td>$123.00</td>
+          <td>32%</td>
+          <td>Jan 20, 2001 1:12 PM</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Martha</td>
+          <td>delFuego</td>
+          <td>25</td>
+          <td>$22.09</td>
+          <td>17%</td>
+          <td>Jun 11, 2011 10:55 AM</td>
+        </tr>
+        </tbody>
+      </table>
+      <!--  End Tables Section  -->
+
+    </div>
+  </div>
+
+
+</main>
+
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+
+      <div class="col l4 s12">
+        <h5 class="white-text">Column 1</h5>
+      </div>
+
+      <div class="col l4 s12">
+        <h5 class="white-text">Column 2</h5>
+      </div>
+
+      <div class="col l4 s12" style="overflow: hidden;">
+        <h5 class="white-text">Column 3</h5>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    <div class="container">
+      © 2014-2015 Materialize, All rights reserved.
+      <a class="grey-text text-lighten-4 right" href="https://github.com/Dogfalo/materialize/blob/master/LICENSE">MIT License</a>
+    </div>
+  </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="js/jquery.timeago.min.js"></script>
+<script src="js/prism.js"></script>
+<script src="bin/materialize.js"></script>
+<script src="js/init.js"></script>
+<script src="../js/table.js"></script>
+
+
+</body>
+</html>

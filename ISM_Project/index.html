@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>LDS-ICS-CIM</title>
+
+  <!-- jQuery -->
+  <script src="docs/js/jquery-latest.min.js"></script>
+  <script src="docs/js/jquery-ui.min.js"></script>
+
+  <!-- Angular Material Dependencies -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+
+
+  <!-- Demo stuff -->
+  <link rel="stylesheet" href="docs/css/jq.css">
+  <link rel="stylesheet" href="docs/css/jquery-ui.min.css">
+
+  <!-- Tablesorter: theme -->
+  <link class="theme blue" rel="stylesheet" href="css/theme.blue.css">
+
+  <!-- Tablesorter script: required -->
+  <script src="js/jquery.tablesorter.js"></script>
+  <script src="js/jquery.tablesorter.widgets.js"></script>
+
+  <script id="js">$(function () {
+
+    $('#table1, .nested, #table3').tablesorter({
+      widthFixed: true,
+      showProcessing: true,
+      headerTemplate: '{content} {icon}', // Add icon for various themes
+
+      widgets: ['zebra', 'stickyHeaders', 'filter'],
+
+      widgetOptions: {
+
+        // extra class name added to the sticky header row
+        stickyHeaders: '',
+        // number or jquery selector targeting the position:fixed element
+        stickyHeaders_offset: 0,
+        // added to table ID, if it exists
+        stickyHeaders_cloneId: '-sticky',
+        // trigger "resize" event on headers
+        stickyHeaders_addResizeEvent: true,
+        // if false and a caption exist, it won't be included in the sticky header
+        stickyHeaders_includeCaption: true,
+        // The zIndex of the stickyHeaders, allows the user to adjust this to their needs
+        stickyHeaders_zIndex: 2,
+        // jQuery selector or object to attach sticky header to
+        stickyHeaders_attachTo: null,
+        // jQuery selector or object to monitor horizontal scroll position (defaults: xScroll > attachTo > window)
+        stickyHeaders_xScroll: null,
+        // jQuery selector or object to monitor vertical scroll position (defaults: yScroll > attachTo > window)
+        stickyHeaders_yScroll: null,
+
+        // scroll table top into view after filtering
+        stickyHeaders_filteredToTop: true
+
+        // *** REMOVED jQuery UI theme due to adding an accordion on this demo page ***
+        // adding zebra striping, using content and default styles - the ui css removes the background from default
+        // even and odd class names included for this demo to allow switching themes
+        // , zebra   : ["ui-widget-content even", "ui-state-default odd"]
+        // use uitheme widget to apply defauly jquery ui (jui) class names
+        // see the uitheme demo for more details on how to change the class names
+        // , uitheme : 'jui'
+      }
+    });
+
+
+  });</script>
+  <script>
+    $(function () {
+
+      window.includeCaption = true;
+      $('.caption').on('click', function () {
+        includeCaption = !includeCaption;
+        $(this).html('' + includeCaption);
+        $('#table0, #table1, #table2, #table3, .nested').each(function () {
+          if (this.config) {
+            this.config.widgetOptions.stickyHeaders_includeCaption = includeCaption;
+            this.config.widgetOptions.$sticky.children('caption').toggle(includeCaption);
+          }
+        });
+      });
+
+      // removed jQuery UI theme because of the accordion!
+      $('link.theme').each(function () {
+        this.disabled = true;
+      });
+
+      var themes = 'blue default green grey ice black-ice dark dropbox metro-dark',
+        i, o = '', t = themes.split(' ');
+      for (i = 0; i < t.length; i++) {
+        o += '<option value="' + t[i] + '">' + t[i] + '</option>';
+      }
+
+      $('select:first')
+        .append(o)
+        .change(function () {
+          var theme = $(this).val().toLowerCase(),
+          // ui-theme is added by the themeswitcher
+            files = $('link.theme').each(function () {
+              this.disabled = true;
+            })
+          files.filter('.' + theme).each(function () {
+            this.disabled = false;
+          });
+          $('table')
+            .removeClass('tablesorter-' + t.join(' tablesorter-'))
+            .addClass('tablesorter-' + (theme === 'black-ice' ? 'blackice' : theme));
+        }).change();
+    });
+  </script>
+
+  <!-- Bootstrap stylesheet -->
+  <link rel="stylesheet" href="docs/css/bootstrap.min.css">
+  <!-- bootstrap widget theme -->
+  <link rel="stylesheet" href="css/theme.bootstrap.css">
+
+  <!-- Bootstrap/Material Style -->
+  <link rel="stylesheet" href="css/material-wfont.css">
+  <link rel="stylesheet" href="css/ripples.css">
+  <script src="js/material.js"></script>
+  <script src="js/ripples.js"></script>
+
+  <!-- Materialize Dependencies -->
+  <!--  Android 5 Chrome Color-->
+  <meta name="theme-color" content="#EE6E73">
+  <link href="css/prism.css" rel="stylesheet">
+  <link href="css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+  <script src="js/jquery.timeago.min.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="js/materialize.js"></script>
+
+  <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <!-- App Specific Dependencies -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/service.js"></script>
+  <script src="js/add/addController.js"></script>
+  <script src="js/directive.js"></script>
+  <script src="js/filter.js"></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-aria.min.js"></script>
+  <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
+
+
+
+
+
+
+
+</head>
+
+<body ng-controller="controller">
+
+<!-- Header -->
+<md-toolbar layout="row" class="md-tall header-title" style="background-color: deepskyblue;">
+  <div layout="row" layout-sm="column">
+    <div flex style="padding-left: 24px;">
+      <span>
+        <div class="pf-logo">
+          <h2>Candidate Interview Manager</h2>
+        </div>
+      </span>
+    </div>
+  </div>
+</md-toolbar>
+<!-- Header -->
+
+<!--Add Candidate Button-->
+<div ng-controller="addController" class="main-fab">
+  <md-button aria-label="Add" class="md-fab md-accent" ng-click="showAdvanced($event)" jstcache="0"><img src="img/bt_speed_dial_2x.png" style="padding: 0px;"></md-button>
+  <b layout="row" layout-align="center center" layout-margin>
+    {{alert}}
+  </b>
+</div>
+<!--Add Candidate Button-->
+
+
+<div class="container">
+
+
+  <div id="main">
+    <div class="row">
+
+
+      <h1>Table</h1>
+
+      <select></select>
+
+      <div class="col s12">
+        <table id="table1" class="hoverable">
+          <caption class="dark-row">Intern Candidates</caption>
+          <!-- dark-row used by metro-dark theme to make the header row darker -->
+          <thead>
+          <tr>
+            <th class="filter-false sorter-false"></th>
+            <th>Name</th>
+            <th>Major</th>
+            <th>Sex</th>
+            <th>English</th>
+            <th>Japanese</th>
+            <th>Calculus</th>
+            <th>Geometry</th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Major</th>
+            <th>Sex</th>
+            <th>English</th>
+            <th>Japanese</th>
+            <th>Calculus</th>
+            <th>Geometry</th>
+          </tr>
+          </tfoot>
+          <tbody>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student01</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>80</td>
+            <td>70</td>
+            <td>75</td>
+            <td>80</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="2"><label for="2"></label></td>
+            <td>Student02</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>90</td>
+            <td>88</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="3"><label for="3"></label></td>
+            <td>Student03</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>85</td>
+            <td>95</td>
+            <td>80</td>
+            <td>85</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student04</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>60</td>
+            <td>55</td>
+            <td>100</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student05</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>68</td>
+            <td>80</td>
+            <td>95</td>
+            <td>80</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student06</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>100</td>
+            <td>99</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student07</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>85</td>
+            <td>68</td>
+            <td>90</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student08</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>100</td>
+            <td>90</td>
+            <td>90</td>
+            <td>85</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student09</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>80</td>
+            <td>50</td>
+            <td>65</td>
+            <td>75</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student10</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>85</td>
+            <td>100</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student11</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>86</td>
+            <td>85</td>
+            <td>100</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student12</td>
+            <td>Mathematics</td>
+            <td>female</td>
+            <td>100</td>
+            <td>75</td>
+            <td>70</td>
+            <td>85</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student13</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>100</td>
+            <td>80</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student14</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>50</td>
+            <td>45</td>
+            <td>55</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student15</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>95</td>
+            <td>35</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student16</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>100</td>
+            <td>50</td>
+            <td>30</td>
+            <td>70</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student17</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>80</td>
+            <td>100</td>
+            <td>55</td>
+            <td>65</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student18</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>30</td>
+            <td>49</td>
+            <td>55</td>
+            <td>75</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student19</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>68</td>
+            <td>90</td>
+            <td>88</td>
+            <td>70</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student20</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>40</td>
+            <td>45</td>
+            <td>40</td>
+            <td>80</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student21</td>
+            <td>Languages</td>
+            <td>male</td>
+            <td>50</td>
+            <td>45</td>
+            <td>100</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student22</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>100</td>
+            <td>99</td>
+            <td>100</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>Student23</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>85</td>
+            <td>80</td>
+            <td>80</td>
+            <td>80</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>student23</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>82</td>
+            <td>77</td>
+            <td>0</td>
+            <td>79</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>student24</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>100</td>
+            <td>91</td>
+            <td>13</td>
+            <td>82</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>student25</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>22</td>
+            <td>96</td>
+            <td>82</td>
+            <td>53</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="1"><label for="1"></label></td>
+            <td>student26</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>37</td>
+            <td>29</td>
+            <td>56</td>
+            <td>59</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="27"><label for="27"></label></td>
+            <td>student27</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>86</td>
+            <td>82</td>
+            <td>69</td>
+            <td>23</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="28"><label for="28"></label></td>
+            <td>student28</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>44</td>
+            <td>25</td>
+            <td>43</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="29"><label for="29"></label></td>
+            <td>student29</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>77</td>
+            <td>47</td>
+            <td>22</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="30"><label for="30"></label></td>
+            <td>student30</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>19</td>
+            <td>35</td>
+            <td>23</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="31"><label for="31"></label></td>
+            <td>student31</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>90</td>
+            <td>27</td>
+            <td>17</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="32"><label for="32"></label></td>
+            <td>student32</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>60</td>
+            <td>75</td>
+            <td>33</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="33"><label for="33"></label></td>
+            <td>student33</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>4</td>
+            <td>31</td>
+            <td>37</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="34"><label for="34"></label></td>
+            <td>student34</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>77</td>
+            <td>97</td>
+            <td>81</td>
+            <td>44</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="35"><label for="35"></label></td>
+            <td>student35</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>5</td>
+            <td>81</td>
+            <td>51</td>
+            <td>95</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="36"><label for="36"></label></td>
+            <td>student36</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>70</td>
+            <td>61</td>
+            <td>70</td>
+            <td>94</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="37"><label for="37"></label></td>
+            <td>student37</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>60</td>
+            <td>3</td>
+            <td>61</td>
+            <td>84</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="38"><label for="38"></label></td>
+            <td>student38</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>63</td>
+            <td>39</td>
+            <td>0</td>
+            <td>11</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="39"><label for="39"></label></td>
+            <td>student39</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>50</td>
+            <td>46</td>
+            <td>32</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="40"><label for="40"></label></td>
+            <td>student40</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>51</td>
+            <td>75</td>
+            <td>25</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="41"><label for="41"></label></td>
+            <td>student41</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>43</td>
+            <td>34</td>
+            <td>28</td>
+            <td>78</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="42"><label for="42"></label></td>
+            <td>student42</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>11</td>
+            <td>89</td>
+            <td>60</td>
+            <td>95</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="43"><label for="43"></label></td>
+            <td>student43</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>48</td>
+            <td>92</td>
+            <td>18</td>
+            <td>88</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="44"><label for="44"></label></td>
+            <td>student44</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>82</td>
+            <td>2</td>
+            <td>59</td>
+            <td>73</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="45"><label for="45"></label></td>
+            <td>student45</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>91</td>
+            <td>73</td>
+            <td>37</td>
+            <td>39</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="46"><label for="46"></label></td>
+            <td>student46</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>4</td>
+            <td>8</td>
+            <td>12</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="47"><label for="47"></label></td>
+            <td>student47</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>89</td>
+            <td>10</td>
+            <td>6</td>
+            <td>11</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="48"><label for="48"></label></td>
+            <td>student48</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>90</td>
+            <td>32</td>
+            <td>21</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="49"><label for="49"></label></td>
+            <td>student49</td>
+            <td>Mathematics</td>
+            <td>male</td>
+            <td>42</td>
+            <td>49</td>
+            <td>49</td>
+            <td>72</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="50"><label for="50"></label></td>
+            <td>student50</td>
+            <td>Languages</td>
+            <td>female</td>
+            <td>56</td>
+            <td>37</td>
+            <td>67</td>
+            <td>54</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
